@@ -21,15 +21,38 @@ export class ClientComponent implements OnInit {
     this.getClients();
   }
 
-  getClients(): void {
-    this.clientService.getAllClients().subscribe(
-      (data) => {
-        console.log(data);
-        this.clients = data;
-      },
-      (error) => {
-        console.log(error.error.error);
-      }
-    );
-  }
+//   getClients(): void {
+//     this.clientService.getAllClients().subscribe(
+//       (response) => {
+//         console.log(response);
+//         // Assuming the client data is stored under the 'data' property
+//         if (response && response.data) {
+//           this.clients = response.data;
+//         } else {
+//           console.log("Invalid client response format");
+//         }
+//       },
+//       (error) => {
+//         console.log(error.error.error);
+//       }
+//     );
+//   }
+
+    getClients(): void {
+        this.clientService.getAllClients().subscribe(
+            (response: any) => {
+                // console.log(response);
+                if (response && response.data) {
+                    this.clients = response.data;
+                    console.log(response.data);
+                } else {
+                    console.log("Invalid client response format");
+                }
+            },
+          (error) => {
+            console.log(error.error.error);
+          }
+        );
+    }
+  
 }
