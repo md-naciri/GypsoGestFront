@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PersistanceService } from '../pages/authentication/persistance.service';
 import { ClientInterface } from './types/client-interface';
+import { ClientRequestInterface } from './types/client-request-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +15,9 @@ export class ClientService {
 
   getAllClients(): Observable<ClientInterface[]> {
     return this.http.get<ClientInterface[]>(environment.apiURL + 'clients');
+  }
+
+  createClient(clientData: ClientRequestInterface): Observable<ClientInterface> {
+    return this.http.post<ClientInterface>(environment.apiURL + 'clients', clientData);
   }
 }
