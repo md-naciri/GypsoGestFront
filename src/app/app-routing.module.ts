@@ -6,6 +6,7 @@ import { UserComponent } from './demo/user/user.component';
 import { AdduserComponent } from './demo/user/adduser/adduser.component';
 import { AuthGuard } from './demo/pages/authentication/guards/auth.guard';
 import { ClientComponent } from './demo/client/client.component';
+import { AdminGuard } from './demo/user/admin.guard';
 
 const routes: Routes = [
   {
@@ -53,10 +54,12 @@ const routes: Routes = [
           import('./demo/extra/sample-page/sample-page.component'),
       },
       {
-        path:'users',component:UserComponent
+        path:'users',component:UserComponent,
+        canActivate: [AdminGuard]
       },
       {
-        path:'addUser',component:AdduserComponent
+        path:'addUser',component:AdduserComponent,
+        canActivate: [AdminGuard]
       },
       {
         path:'client',component:ClientComponent

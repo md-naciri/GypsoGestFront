@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Observable, map } from 'rxjs';
-import { AuthService } from '../auth.service';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { AuthService } from '../pages/authentication/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -14,13 +15,15 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-    return this.authService.isTokenValid().pipe(
+    return this.authService.isRoleValid().pipe(
       map(isValid => {
         if (!isValid) {
-          
-          this.router.navigate(['/auth/signin']);
+          return this.router.parseUrl('/dashboard'); // Redirect to signin if role is not valid
         }
-        return isValid;
+        return true;
+      }),
+      catchError(() => {
+        return of(this.router.parseUrl('/auth/signin'));// Handle observable error by redirecting to signin
       })
     );
   }

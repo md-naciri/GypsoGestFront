@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, map, tap } from 'rxjs';
+import { Observable, Subject, map, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PersistanceService } from './persistance.service';
 import { LoginRequestInterface } from './loginRequest.interface';
@@ -15,7 +15,8 @@ export class AuthService {
 
   constructor(private http:HttpClient, private persistanceService: PersistanceService) { }
   token = this.persistanceService.get('accessToken');
-  googleToken: string = "";
+  role = "ROLE_ADMIN"
+  // googleToken: string = "";
 
   private readonly validationUrl = environment.apiUrlAuth + 'validate-token';
 
@@ -39,4 +40,10 @@ export class AuthService {
     const token = this.persistanceService.get('accessToken'); 
     return this.http.post<boolean>(this.validationUrl, { token: token });
   }
+  isRoleValid(): Observable<boolean> {
+    const roleFromStorage = this.persistanceService.get('role');
+    const isValid = roleFromStorage === this.role;
+    return of(isValid);
+  }
 }
+
