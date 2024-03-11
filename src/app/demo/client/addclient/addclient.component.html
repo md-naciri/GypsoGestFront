@@ -1,1 +1,62 @@
-<p>addclient works!</p>
+<div class="row">
+    <div class="d-flex justify-content-center">
+      <div *ngIf="errorMessage" class="alert alert-danger col-6 alert-dismissible fade show" role="alert">
+        <strong>Error! {{errorMessage}}</strong>
+        <button (click)="closeErrorAlert()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div *ngIf="successMessage" class="alert alert-success  col-6 alert-dismissible fade show" role="alert">
+        <strong>Success!! {{successMessage}}</strong>
+        <button (click)="closeSuccessAlert()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+    
+    <div class="col-sm-12">
+      <app-card cardTitle="Add User" [options]="false">
+        <form [formGroup]="addClientForm" (ngSubmit)="createClient()" id="addClientForm" class="row">
+          <div class="col-md-6">
+            <div>
+              <div class="form-group">
+                <label for="text">First Name</label>
+                <input formControlName="firstName" type="text" class="form-control" placeholder="First Name" />
+                <strong class="text-danger" *ngIf="addClientForm.get('firstName')?.invalid && addClientForm.get('firstName')?.touched">
+                  First Name is required.
+                </strong>
+              </div>
+              <div class="form-group">
+                <label for="text">Last Name</label>
+                <input formControlName="lastName" type="text" class="form-control" placeholder="Last Name" />
+                <strong class="text-danger"
+                  *ngIf="addClientForm.get('lastName')?.invalid && addClientForm.get('lastName')?.touched">
+                  Last Name is required.
+                </strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div>
+              <div class="form-group">
+                <label for="text">Email</label>
+                <input formControlName="email" type="email" class="form-control" placeholder="Email" />
+                <strong class="text-danger"
+                  *ngIf="addClientForm.get('email')?.invalid && addClientForm.get('email')?.touched">
+                  Email is required.
+                </strong>
+              </div>
+              <div class="form-group">
+                <label for="text">CIN</label>
+                <input formControlName="cin" type="text" class="form-control" placeholder="CIN" />
+                <strong class="text-danger"
+                  *ngIf="addClientForm.get('cin')?.invalid && addClientForm.get('cin')?.touched">
+                  CIN is required.
+                </strong>
+              </div>
+  
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+  
+        </form>
+      </app-card>
+    </div>
+  </div>
+  
