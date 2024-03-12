@@ -1,1 +1,94 @@
-<p>addsale works!</p>
+<div class="row">
+    <div class="d-flex justify-content-center">
+        <div *ngIf="errorMessage" class="alert alert-danger col-6 alert-dismissible fade show" role="alert">
+            <strong>Error! {{errorMessage}}</strong>
+            <button (click)="closeErrorAlert()" type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+        </div>
+        <div *ngIf="successMessage" class="alert alert-success col-6 alert-dismissible fade show" role="alert">
+            <strong>Success!! {{successMessage}}</strong>
+            <button (click)="closeSuccessAlert()" type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <app-card cardTitle="Add Sale" [options]="false">
+            <form [formGroup]="addSaleForm" (ngSubmit)="createSale()" id="addSaleForm" class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input formControlName="date" type="datetime-local" class="form-control" placeholder="Date" />
+                        <strong class="text-danger"
+                            *ngIf="addSaleForm.get('date')?.invalid && addSaleForm.get('date')?.touched">
+                            Date is required.
+                        </strong>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientId">Client ID</label>
+                        <input formControlName="clientId" type="number" class="form-control" placeholder="Client ID" />
+                        <strong class="text-danger"
+                            *ngIf="addSaleForm.get('clientId')?.invalid && addSaleForm.get('clientId')?.touched">
+                            Client ID is required and must be a number.
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div formArrayName="items">
+                        <div *ngFor="let item of addSaleForm.get('items')['controls']; let i=index">
+                            <div [formGroupName]="i">
+                                <div class="form-group">
+                                    <label for="quantity">Quantity</label>
+                                    <input formControlName="quantity" type="number" class="form-control"
+                                        placeholder="Quantity" />
+                                    <strong class="text-danger"
+                                        *ngIf="item.get('quantity')?.invalid && item.get('quantity')?.touched">
+                                        Quantity is required and must be a number.
+                                    </strong>
+                                </div>
+                                <div class="form-group">
+                                    <label for="unitPrice">Unit Price</label>
+                                    <input formControlName="unitPrice" type="number" class="form-control"
+                                        placeholder="Unit Price" />
+                                    <strong class="text-danger"
+                                        *ngIf="item.get('unitPrice')?.invalid && item.get('unitPrice')?.touched">
+                                        Unit Price is required and must be a number.
+                                    </strong>
+                                </div>
+                                <!-- <div class="form-group">
+                                    <label for="gypseType">Gypse Type</label>
+                                    <input formControlName="gypseType" type="text" class="form-control"
+                                        placeholder="Gypse Type" />
+                                    <strong class="text-danger"
+                                        *ngIf="item.get('gypseType')?.invalid && item.get('gypseType')?.touched">
+                                        Gypse Type is required.
+                                    </strong>
+                                </div> -->
+                                <div class="form-group">
+                                    <label for="gypseType">Gypse Type</label>
+                                    <select formControlName="gypseType" class="form-control">
+                                        <option value="">Select Gypse Type</option>
+                                        <option value="Staff">Staff</option>
+                                        <option value="Moulage">Moulage</option>
+                                        <option value="Plafond">Plafond</option>
+                                        <option value="MortierProjeteStandard">MortierProjeteStandard</option>
+                                        <option value="MortierProjeteUltra">MortierProjeteUltra</option>
+                                    </select>
+                                    <strong class="text-danger" *ngIf="item.get('gypseType')?.invalid && item.get('gypseType')?.touched">
+                                        Gypse Type is required.
+                                    </strong>
+                                </div>
+                                
+                                <button type="button" class="btn btn-danger" (click)="removeItem(i)">Remove Item</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary mt-2" (click)="addItem()">Add Item</button>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </app-card>
+    </div>
+</div>
