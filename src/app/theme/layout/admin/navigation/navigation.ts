@@ -37,12 +37,20 @@ const NavigationItems = [
         icon: 'feather icon-home',
         classes: 'nav-item',
       },
+    ],
+  },
+  {
+    id: 'user',
+    title: 'user',
+    type: 'group',
+    icon: 'icon-user',
+    children: [
       {
         id: 'add user',
         title: 'add user',
         type: 'item',
         url: '/addUser',
-        icon: 'feather icon-users',
+        icon: 'feather icon-user-plus',
         classes: 'nav-item',
         role: "ROLE_ADMIN"
       },
@@ -55,15 +63,55 @@ const NavigationItems = [
         classes: 'nav-item',
         role: "ROLE_ADMIN"
       },
+    ]
+  },
+  {
+    id: 'client',
+    title: 'client',
+    type: 'group',
+    icon: 'icon-client',
+    children: [
       {
-        id: 'client',
-        title: 'Client',
+        id: 'add client',
+        title: 'add client',
         type: 'item',
-        url: '/client',
-        icon: 'feather icon-home',
+        url: '/addClient',
+        icon: 'feather icon-user-plus',
+        classes: 'nav-item',
+      },
+      {
+        id: 'clients',
+        title: 'clients',
+        type: 'item',
+        url: '/clients',
+        icon: 'feather icon-users',
         classes: 'nav-item',
       }
-    ],
+    ]
+  },
+  {
+    id: 'sale',
+    title: 'sale',
+    type: 'group',
+    icon: 'icon-sale',
+    children: [
+      {
+        id: 'add sale',
+        title: 'add sale',
+        type: 'item',
+        url: '/addSale',
+        icon: 'feather icon-shopping-cart',
+        classes: 'nav-item',
+      },
+      {
+        id: 'sales',
+        title: 'sales',
+        type: 'item',
+        url: '/sales',
+        icon: 'feather icon-shopping-cart',
+        classes: 'nav-item',
+      }
+    ]
   },
   {
     id: 'ui-element',

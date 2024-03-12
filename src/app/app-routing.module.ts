@@ -7,6 +7,7 @@ import { AdduserComponent } from './demo/user/adduser/adduser.component';
 import { AuthGuard } from './demo/pages/authentication/guards/auth.guard';
 import { ClientComponent } from './demo/client/client.component';
 import { AdminGuard } from './demo/user/admin.guard';
+import { AddclientComponent } from './demo/client/addclient/addclient.component';
 
 const routes: Routes = [
   {
@@ -62,7 +63,10 @@ const routes: Routes = [
         canActivate: [AdminGuard]
       },
       {
-        path:'client',component:ClientComponent
+        path:'clients',component:ClientComponent
+      },
+      {
+        path:'addClient',component:AddclientComponent
       },
     ]
     ,
