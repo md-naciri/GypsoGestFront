@@ -1,1 +1,83 @@
-<p>addtransaction works!</p>
+<div class="row">
+    <div class="d-flex justify-content-center">
+        <div *ngIf="errorMessage" class="alert alert-danger col-6 alert-dismissible fade show" role="alert">
+            <strong>Error! {{errorMessage}}</strong>
+            <button (click)="closeErrorAlert()" type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+        </div>
+        <div *ngIf="successMessage" class="alert alert-success col-6 alert-dismissible fade show" role="alert">
+            <strong>Success!! {{successMessage}}</strong>
+            <button (click)="closeSuccessAlert()" type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <app-card cardTitle="Add Transaction" [options]="false">
+            <form [formGroup]="addTransactionForm" (ngSubmit)="createTransaction()" id="addTransactionForm" class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input formControlName="date" type="datetime-local" class="form-control" placeholder="Date" />
+                        <strong class="text-danger"
+                            *ngIf="addTransactionForm.get('date')?.invalid && addTransactionForm.get('date')?.touched">
+                            Date is required.
+                        </strong>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientId">Client ID</label>
+                        <input formControlName="clientId" type="number" class="form-control" placeholder="Client ID" />
+                        <strong class="text-danger"
+                            *ngIf="addTransactionForm.get('clientId')?.invalid && addTransactionForm.get('clientId')?.touched">
+                            Client ID is required and must be a number.
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!-- <div class="form-group">
+                        <label for="paymentType">Payment Type</label>
+                        <input formControlName="paymentType" type="text" class="form-control" placeholder="Payment Type" />
+                        <strong class="text-danger"
+                            *ngIf="addTransactionForm.get('paymentType')?.invalid && addTransactionForm.get('paymentType')?.touched">
+                            Payment Type is required.
+                        </strong>
+                    </div> -->
+                    <div class="form-group">
+                        <label for="paymentType">Payment Type</label>
+                        <select formControlName="paymentType" class="form-control">
+                            <option value="">Select Payment Type</option>
+                            <option value="Cheque">Cheque</option>
+                            <option value="Effet">Effet</option>
+                            <option value="Virement">Virement</option>
+                            <option value="Versement">Versement</option>
+                            <option value="Cash">Cash</option>
+                        </select>
+                        <strong class="text-danger"
+                            *ngIf="addTransactionForm.get('paymentType')?.invalid && addTransactionForm.get('paymentType')?.touched">
+                            Payment Type is required.
+                        </strong>
+                    </div>                    
+                    <div class="form-group">
+                        <label for="paymentCode">Payment Code</label>
+                        <input formControlName="paymentCode" type="text" class="form-control" placeholder="Payment Code" />
+                        <strong class="text-danger"
+                            *ngIf="addTransactionForm.get('paymentCode')?.invalid && addTransactionForm.get('paymentCode')?.touched">
+                            Payment Code is required.
+                        </strong>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <input formControlName="amount" type="number" class="form-control" placeholder="Amount" />
+                        <strong class="text-danger"
+                            *ngIf="addTransactionForm.get('amount')?.invalid && addTransactionForm.get('amount')?.touched">
+                            Amount is required and must be a number.
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </app-card>
+    </div>
+</div>
