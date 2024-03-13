@@ -14,6 +14,9 @@ import { TransactionComponent } from './demo/transaction/transaction.component';
 import { AddtransactionComponent } from './demo/transaction/addtransaction/addtransaction.component';
 import { AddpaymentReversalComponent } from './demo/payment-reversal/addpayment-reversal/addpayment-reversal.component';
 import { PaymentReversalComponent } from './demo/payment-reversal/payment-reversal.component';
+import { ClientCreditComponent } from './demo/accounting/client-credit/client-credit.component';
+import { ClientDebitComponent } from './demo/accounting/client-debit/client-debit.component';
+import { ClientSoldComponent } from './demo/accounting/client-sold/client-sold.component';
 
 const routes: Routes = [
   {
@@ -91,6 +94,15 @@ const routes: Routes = [
       },
       {
         path:'paymentReversal', component: PaymentReversalComponent
+      },
+      {
+        path: 'clientCredit', component: ClientCreditComponent
+      },
+      {
+        path: 'clientDebit', component: ClientDebitComponent
+      },
+      {
+        path: 'clientSold', component: ClientSoldComponent
       }
     ]
     ,
