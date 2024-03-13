@@ -10,6 +10,8 @@ import { AdminGuard } from './demo/user/admin.guard';
 import { AddclientComponent } from './demo/client/addclient/addclient.component';
 import { AddsaleComponent } from './demo/sale/addsale/addsale.component';
 import { SaleComponent } from './demo/sale/sale.component';
+import { TransactionComponent } from './demo/transaction/transaction.component';
+import { AddtransactionComponent } from './demo/transaction/addtransaction/addtransaction.component';
 
 const routes: Routes = [
   {
@@ -77,10 +79,10 @@ const routes: Routes = [
         path:'sales', component: SaleComponent
       },
       {
-        path:'transactions', component: SaleComponent
+        path:'transactions', component: TransactionComponent
       },
       {
-        path:'addTransaction', component: SaleComponent
+        path:'addTransaction', component: AddtransactionComponent
       }
     ]
     ,
