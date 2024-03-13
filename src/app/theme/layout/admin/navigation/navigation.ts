@@ -138,6 +138,30 @@ const NavigationItems = [
     ]
   },
   {
+    id: 'payment reversal',
+    title: 'payment reversal',
+    type: 'group',
+    icon: 'icon-payment-reversal',
+    children: [
+      {
+        id: 'add payment reversal',
+        title: 'add payment reversal',
+        type: 'item',
+        url: '/addPaymentReversal',
+        icon: 'feather icon-arrow-left',
+        classes: 'nav-item',
+      },
+      {
+        id: 'payment reversals',
+        title: 'payment reversals',
+        type: 'item',
+        url: '/paymentReversal',
+        icon: 'feather icon-arrow-left',
+        classes: 'nav-item',
+      }
+    ]
+  },
+  {
     id: 'ui-element',
     title: 'UI ELEMENT',
     type: 'group',
