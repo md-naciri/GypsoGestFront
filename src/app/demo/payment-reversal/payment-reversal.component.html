@@ -1,1 +1,32 @@
-<p>payment-reversal works!</p>
+<div class="row">
+    <div class="col-xl-12">
+      <app-card cardTitle="Payment Reversals" [options]="false" blockClass="table-border-style">
+        <div class="table-responsive">
+          <table class="table table-styling">
+            <thead>
+              <tr class="table-primary">
+                <th>Id</th>
+                <th>Date</th>
+                <th>Client ID</th>
+                <th>Payment Code</th>
+                <th class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let paymentReversal of paymentReversals">
+                <td>{{ paymentReversal.id }}</td>
+                <td>{{ paymentReversal.date | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                <td>{{ paymentReversal.clientId }}</td>
+                <td>{{ paymentReversal.paymentCode }}</td>
+                <td class="text-center">
+                  <button class="btn btn-warning btn-sm">Edit</button>
+                  <button class="btn btn-danger btn-sm">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </app-card>
+    </div>
+  </div>
+
