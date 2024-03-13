@@ -1,1 +1,75 @@
-<p>client-debit works!</p>
+<div class="row">
+    <div class="col-xl-12">
+        
+      <app-card cardTitle="Client Debit" [options]="false" blockClass="table-border-style">
+        <div class="d-flex justify-content-end mb-3">
+            <input type="number" placeholder="Enter Client ID" [(ngModel)]="clientId" class="form-control" (change)="getClientDebit()">
+          </div>
+        <div *ngIf="debitData" class="table-responsive">
+          <table class="table table-styling">
+            <thead>
+              <tr class="table-primary">
+                <th>Client ID</th>
+                <th>Client Name</th>
+                <th>Email</th>
+                <th>CIN</th>
+                <th>Total Debit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ debitData.client.id }}</td>
+                <td>{{ debitData.client.FirstName }} {{ debitData.client.LastName }}</td>
+                <td>{{ debitData.client.Email }}</td>
+                <td>{{ debitData.client.CIN }}</td>
+                <td>{{ debitData.debit }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="debitData && debitData.transactions && debitData.transactions.length > 0" class="table-responsive">
+          <table class="table table-styling">
+            <thead>
+              <tr class="table-primary">
+                <th>Transaction ID</th>
+                <th>Date</th>
+                <th>Payment Type</th>
+                <th>Payment Code</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let transaction of debitData.transactions">
+                <td>{{ transaction.id }}</td>
+                <td>{{ transaction.date | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                <td>{{ transaction.paymentType }}</td>
+                <td>{{ transaction.paymentCode }}</td>
+                <td>{{ transaction.amount }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="debitData && debitData.listOfReturned && debitData.listOfReturned.length > 0" class="table-responsive">
+          <table class="table table-styling">
+            <thead>
+              <tr class="table-primary">
+                <th>Return ID</th>
+                <th>Date</th>
+                <th>Client ID</th>
+                <th>Payment Code</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let returned of debitData.listOfReturned">
+                <td>{{ returned.id }}</td>
+                <td>{{ returned.date | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                <td>{{ returned.clientId }}</td>
+                <td>{{ returned.paymentCode }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="!debitData" class="text-center">Loading...</div>
+      </app-card>
+    </div>
+  </div>
