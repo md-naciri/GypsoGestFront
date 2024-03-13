@@ -1,1 +1,34 @@
-<p>client-sold works!</p>
+<div class="row">
+    <div class="col-xl-12">
+        
+      <app-card cardTitle="Client Sold" [options]="false" blockClass="table-border-style">
+        <div class="d-flex justify-content-end mb-3">
+            <input type="number" placeholder="Enter Client ID" [(ngModel)]="clientId" class="form-control" (change)="getClientSold()">
+          </div>
+        <div *ngIf="soldData" class="table-responsive">
+          <table class="table table-styling">
+            <thead>
+              <tr class="table-primary">
+                <th>Client ID</th>
+                <th>Client Name</th>
+                <th>Email</th>
+                <th>CIN</th>
+                <th>Total Sold</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ soldData.client.id }}</td>
+                <td>{{ soldData.client.FirstName }} {{ soldData.client.LastName }}</td>
+                <td>{{ soldData.client.Email }}</td>
+                <td>{{ soldData.client.CIN }}</td>
+                <td>{{ soldData.total }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="!soldData" class="text-center">Loading...</div>
+      </app-card>
+    </div>
+  </div>
+
