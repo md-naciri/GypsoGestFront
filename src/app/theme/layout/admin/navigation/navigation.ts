@@ -114,6 +114,30 @@ const NavigationItems = [
     ]
   },
   {
+    id: 'transaction',
+    title: 'transaction',
+    type: 'group',
+    icon: 'icon-transaction',
+    children: [
+      {
+        id: 'add transaction',
+        title: 'add transaction',
+        type: 'item',
+        url: '/addTransaction',
+        icon: 'feather icon-chevron-up',
+        classes: 'nav-item',
+      },
+      {
+        id: 'transactions',
+        title: 'transactions',
+        type: 'item',
+        url: '/transactions',
+        icon: 'feather icon-chevrons-up',
+        classes: 'nav-item',
+      }
+    ]
+  },
+  {
     id: 'ui-element',
     title: 'UI ELEMENT',
     type: 'group',

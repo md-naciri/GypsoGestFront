@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { PersistanceService } from '../pages/authentication/persistance.service';
 import { ClientInterface } from './types/client-interface';
 import { ClientRequestInterface } from './types/client-request-interface';
 
@@ -11,7 +10,7 @@ import { ClientRequestInterface } from './types/client-request-interface';
 })
 export class ClientService {
 
-  constructor(private http: HttpClient, private persistanceService: PersistanceService) { }
+  constructor(private http: HttpClient) { }
 
   getAllClients(): Observable<ClientInterface[]> {
     return this.http.get<ClientInterface[]>(environment.apiURL + 'clients');

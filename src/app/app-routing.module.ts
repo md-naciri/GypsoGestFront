@@ -8,6 +8,8 @@ import { AuthGuard } from './demo/pages/authentication/guards/auth.guard';
 import { ClientComponent } from './demo/client/client.component';
 import { AdminGuard } from './demo/user/admin.guard';
 import { AddclientComponent } from './demo/client/addclient/addclient.component';
+import { AddsaleComponent } from './demo/sale/addsale/addsale.component';
+import { SaleComponent } from './demo/sale/sale.component';
 
 const routes: Routes = [
   {
@@ -68,6 +70,18 @@ const routes: Routes = [
       {
         path:'addClient',component:AddclientComponent
       },
+      {
+        path:'addSale', component: AddsaleComponent
+      },
+      {
+        path:'sales', component: SaleComponent
+      },
+      {
+        path:'transactions', component: SaleComponent
+      },
+      {
+        path:'addTransaction', component: SaleComponent
+      }
     ]
     ,
     canActivate: [AuthGuard]
