@@ -1,1 +1,57 @@
-<p>client-credit works!</p>
+<!-- client-credit.component.html -->
+<div class="row">
+    <div class="col-xl-12">
+        
+      <app-card cardTitle="Client Credit" [options]="false" blockClass="table-border-style">
+        <div class="d-flex justify-content-end mb-3">
+            <input type="number" placeholder="Enter Client ID" [(ngModel)]="clientId" class="form-control" (change)="getClientCredit()">
+          </div>
+        <div *ngIf="creditData" class="table-responsive">
+          <table class="table table-styling">
+            <thead>
+              <tr class="table-primary">
+                <th>Client ID</th>
+                <th>Client Name</th>
+                <th>Email</th>
+                <th>CIN</th>
+                <th>Total Credit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ creditData.client.id }}</td>
+                <td>{{ creditData.client.FirstName }} {{ creditData.client.LastName }}</td>
+                <td>{{ creditData.client.Email }}</td>
+                <td>{{ creditData.client.CIN }}</td>
+                <td>{{ creditData.credit }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="creditData && creditData.sales && creditData.sales.length > 0" class="table-responsive">
+          <table class="table table-styling">
+            <thead>
+              <tr class="table-primary">
+                <th>Sales ID</th>
+                <th>Date</th>
+                <th>Items</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sale of creditData.sales">
+                <td>{{ sale.id }}</td>
+                <td>{{ sale.date | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                <td>
+                  <ul>
+                    <li *ngFor="let item of sale.items">{{ item.quantity }} x {{ item.gypseType }} ({{ item.unitPrice }})</li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="!creditData" class="text-center">Loading...</div>
+      </app-card>
+    </div>
+  </div>
+  

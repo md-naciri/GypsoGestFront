@@ -1,10 +1,10 @@
 export interface CreditInterface {
     client: {
         id: number;
-        firstName: string;
-        lastName: string;
-        email: string;
-        cin: string;
+        FirstName: string;
+        LastName: string;
+        Email: string;
+        CIN: string;
     };
     sales: {
         id: number;
