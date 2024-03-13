@@ -12,6 +12,8 @@ import { AddsaleComponent } from './demo/sale/addsale/addsale.component';
 import { SaleComponent } from './demo/sale/sale.component';
 import { TransactionComponent } from './demo/transaction/transaction.component';
 import { AddtransactionComponent } from './demo/transaction/addtransaction/addtransaction.component';
+import { AddpaymentReversalComponent } from './demo/payment-reversal/addpayment-reversal/addpayment-reversal.component';
+import { PaymentReversalComponent } from './demo/payment-reversal/payment-reversal.component';
 
 const routes: Routes = [
   {
@@ -83,6 +85,12 @@ const routes: Routes = [
       },
       {
         path:'addTransaction', component: AddtransactionComponent
+      },
+      {
+        path:'addPaymentReversal', component: AddpaymentReversalComponent
+      },
+      {
+        path:'paymentReversal', component: PaymentReversalComponent
       }
     ]
     ,
