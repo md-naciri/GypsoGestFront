@@ -13,6 +13,8 @@
                 <th>Client Name</th>
                 <th>Email</th>
                 <th>CIN</th>
+                <th>Total credit</th>
+                <th>Total debit</th>
                 <th>Total Sold</th>
               </tr>
             </thead>
@@ -22,6 +24,8 @@
                 <td>{{ soldData.client.FirstName }} {{ soldData.client.LastName }}</td>
                 <td>{{ soldData.client.Email }}</td>
                 <td>{{ soldData.client.CIN }}</td>
+                <td>{{ soldData.credit }}</td>
+                <td>{{ soldData.debit }}</td>
                 <td>{{ soldData.total }}</td>
               </tr>
             </tbody>

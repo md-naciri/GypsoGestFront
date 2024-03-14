@@ -7,5 +7,7 @@ export interface SoldInterface {
         CIN: string;
     };
     total: number;
+    credit: number;
+    debit: number;
 }
 
