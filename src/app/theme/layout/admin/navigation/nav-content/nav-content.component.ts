@@ -32,7 +32,10 @@ export class NavContentComponent implements OnInit {
 
   // life cycle event
   ngOnInit() {
-    let role = this.persistService.get('role');
+    const token = this.persistService.get('accessToken');
+    const decodedToken = JSON.parse(atob(token.split('.')[1])); // Decoding and parsing JWT token
+    const role: string = decodedToken['roles'];
+    // let role = this.persistService.get('role');
     this.navigation.forEach(element => {
 
       for (let i = 0; i < element.children.length; i++) {

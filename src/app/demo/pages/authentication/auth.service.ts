@@ -15,7 +15,7 @@ export class AuthService {
 
   constructor(private http:HttpClient, private persistanceService: PersistanceService) { }
   token = this.persistanceService.get('accessToken');
-  role = "ROLE_ADMIN"
+  // role = "ROLE_ADMIN"
   // googleToken: string = "";
 
   private readonly validationUrl = environment.apiUrlAuth + 'validate-token';
@@ -41,8 +41,19 @@ export class AuthService {
     return this.http.post<boolean>(this.validationUrl, { token: token });
   }
   isRoleValid(): Observable<boolean> {
-    const roleFromStorage = this.persistanceService.get('role');
-    const isValid = roleFromStorage === this.role;
+    // const roleFromStorage = this.persistanceService.get('role');
+    // const isValid = roleFromStorage === this.role;
+    // return of(isValid);
+    const token = this.persistanceService.get('accessToken');
+    const decodedToken = JSON.parse(atob(token.split('.')[1])); // Decoding and parsing JWT token
+    
+    // Extract the role directly from the token
+    const role: string = decodedToken['roles'];
+    const isValid = role === 'ROLE_ADMIN'; // Check if the user has the required role
+
+    // console.log(role);
+
+    
     return of(isValid);
   }
 }

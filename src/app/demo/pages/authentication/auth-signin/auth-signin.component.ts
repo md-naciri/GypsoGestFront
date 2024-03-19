@@ -39,7 +39,6 @@ export default class AuthSigninComponent {
           console.log(data);
           this.persistService.set('accessToken', data.token);
           this.persistService.set('name', data.name);
-          this.persistService.set('role', data.role);
 
           if(this.persistService.get('accessToken') != null){
             console.log("ook");
