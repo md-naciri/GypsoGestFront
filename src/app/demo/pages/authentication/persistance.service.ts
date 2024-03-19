@@ -23,6 +23,9 @@ export class PersistanceService {
       return null;
     }
   }
+  remove(key: string): void {
+    localStorage.removeItem(key);
+  }
   // getFirstName(key: string): string | null {
   //   return localStorage.getItem(key);
   // }
