@@ -19,4 +19,8 @@ export class ClientService {
   createClient(clientData: ClientRequestInterface): Observable<ClientInterface> {
     return this.http.post<ClientInterface>(environment.apiURL + 'clients', clientData);
   }
+  deleteClient(id: number): Observable<any> {
+    return this.http.delete<any>(`${environment.apiURL}clients/${id}`);
+  }
+  
 }
