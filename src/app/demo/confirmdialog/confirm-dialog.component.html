@@ -1,0 +1,9 @@
+<h2 mat-dialog-title class="confirmation-title">Confirmation</h2>
+<div mat-dialog-content class="confirmation-content">
+  <p>{{ data.message }}</p>
+</div>
+<div mat-dialog-actions class="confirmation-actions">
+  <button mat-button class="confirmation-button btn btn-icon btn-success" (click)="onNoClick()"><i class="feather icon-slash"></i></button>
+  <button mat-button class="confirmation-button btn btn-icon btn-danger" (click)="onYesClick()"><i class="feather icon-check-circle"></i></button>
+</div>
+

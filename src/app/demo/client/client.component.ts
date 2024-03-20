@@ -4,6 +4,7 @@ import { ClientInterface } from './types/client-interface';
 import { ClientService } from './client.service';
 import { CardComponent } from "../../theme/shared/components/card/card.component";
 import { CommonModule } from '@angular/common';
+import { ConfirmDialogComponent } from '../confirmdialog/confirm.dialog.component'; // Import the confirmation dialog component
 
 @Component({
   selector: 'app-client',
@@ -14,6 +15,8 @@ import { CommonModule } from '@angular/common';
 })
 export class ClientComponent implements OnInit {
   clients: ClientInterface[] = [];
+  errorMessage: string = '';
+  successMessage: string = '';
 
   constructor(public dialog: MatDialog, private clientService: ClientService) { }
 
@@ -53,6 +56,51 @@ export class ClientComponent implements OnInit {
             console.log(error.error.error);
           }
         );
+    }
+
+    // deleteClient(id: number): void {
+    //   this.clientService.deleteClient(id).subscribe(
+    //     () => {
+    //       // Remove the deleted client from the clients array
+    //       this.clients = this.clients.filter(client => client.id !== id);
+    //       console.log(`Client with ID ${id} deleted successfully.`);
+    //       this.successMessage = "Client has been deleted successfully";
+    //     },
+    //     (error) => {
+    //       this.errorMessage = error.error.error;
+    //     }
+    //   );
+    // }
+    deleteClient(id: number): void {
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        data: {
+          message: 'Are you sure you want to delete this client?' // Confirmation message
+        }
+      });
+    
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.clientService.deleteClient(id).subscribe(
+            () => {
+              // Remove the deleted client from the clients array
+              this.clients = this.clients.filter(client => client.id !== id);
+              console.log(`Client with ID ${id} deleted successfully.`);
+              this.successMessage = "Client has been deleted successfully";
+            },
+            (error) => {
+              this.errorMessage = error.error.error;
+            }
+          );
+        }
+      });
+    }
+    
+    closeSuccessAlert(): void {
+      this.successMessage = '';
+    }
+  
+    closeErrorAlert(): void {
+      this.successMessage = '';
     }
   
 }
