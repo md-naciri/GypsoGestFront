@@ -56,5 +56,8 @@ export class AuthService {
     
     return of(isValid);
   }
+  deleteUser(username: string): Observable<any> {
+    return this.http.delete<any>(`${environment.apiURL}users/${username}`);
+  }
 }
 

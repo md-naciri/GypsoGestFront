@@ -40,14 +40,14 @@ const NavigationItems = [
     ],
   },
   {
-    id: 'user',
-    title: 'user',
+    id: 'employee',
+    title: 'employee',
     type: 'group',
     icon: 'icon-user',
     children: [
       {
-        id: 'add user',
-        title: 'add user',
+        id: 'add employee',
+        title: 'add employee',
         type: 'item',
         url: '/addUser',
         icon: 'feather icon-user-plus',
@@ -55,8 +55,8 @@ const NavigationItems = [
         role: "ROLE_ADMIN"
       },
       {
-        id: 'users',
-        title: 'users',
+        id: 'employees',
+        title: 'employees',
         type: 'item',
         url: '/users',
         icon: 'feather icon-users',
