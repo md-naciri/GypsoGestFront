@@ -17,28 +17,44 @@
             <form [formGroup]="addSaleForm" (ngSubmit)="createSale()" id="addSaleForm" class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="date">Date</label>
+                        <label for="date">Date <div style="color: #999;">Date of the operation</div></label>
                         <input formControlName="date" type="datetime-local" class="form-control" placeholder="Date" />
                         <strong class="text-danger"
                             *ngIf="addSaleForm.get('date')?.invalid && addSaleForm.get('date')?.touched">
                             Date is required.
                         </strong>
                     </div>
-                    <div class="form-group">
-                        <label for="clientId">Client ID</label>
+                    <!-- <div class="form-group">
+                        <label for="clientId">Client Identifier <div style="color: #999;">The unique identifier for the client</div></label>
                         <input formControlName="clientId" type="number" class="form-control" placeholder="Client ID" />
                         <strong class="text-danger"
                             *ngIf="addSaleForm.get('clientId')?.invalid && addSaleForm.get('clientId')?.touched">
                             Client ID is required and must be a number.
                         </strong>
+                    </div> -->
+
+                    <div class="form-group">
+                        <label for="clientId">Client Identifier 
+                            <div style="color: #999;">The unique identifier for the client</div>
+                        </label>
+                        <input formControlName="clientId" type="text" class="form-control" placeholder="Search for a client..." (input)="filterClients($event)">
+                        <div *ngIf="filteredClients.length > 0" class="autocomplete-list">
+                            <div *ngFor="let client of filteredClients" (click)="selectClient(client)">
+                                {{ client.FirstName }} {{ client.LastName }}
+                            </div>
+                        </div>
+                        <strong class="text-danger" *ngIf="addSaleForm.get('clientId')?.invalid && addSaleForm.get('clientId')?.touched">
+                            Client ID is required and must be a number.
+                        </strong>
                     </div>
+                    
                 </div>
                 <div class="col-md-6">
                     <div formArrayName="items">
                         <div *ngFor="let item of addSaleForm.get('items')['controls']; let i=index">
                             <div [formGroupName]="i">
                                 <div class="form-group">
-                                    <label for="quantity">Quantity</label>
+                                    <label for="quantity">Quantity <div style="color: #999;">The amount of gypsum sold, measured in tonnes</div></label>
                                     <input formControlName="quantity" type="number" class="form-control"
                                         placeholder="Quantity" />
                                     <strong class="text-danger"
@@ -47,7 +63,7 @@
                                     </strong>
                                 </div>
                                 <div class="form-group">
-                                    <label for="unitPrice">Unit Price</label>
+                                    <label for="unitPrice">Unit Price <div style="color: #999;">The price per tonne of gypsum, denoted in Moroccan Dirhams</div></label>
                                     <input formControlName="unitPrice" type="number" class="form-control"
                                         placeholder="Unit Price" />
                                     <strong class="text-danger"
@@ -55,19 +71,10 @@
                                         Unit Price is required and must be a number.
                                     </strong>
                                 </div>
-                                <!-- <div class="form-group">
-                                    <label for="gypseType">Gypse Type</label>
-                                    <input formControlName="gypseType" type="text" class="form-control"
-                                        placeholder="Gypse Type" />
-                                    <strong class="text-danger"
-                                        *ngIf="item.get('gypseType')?.invalid && item.get('gypseType')?.touched">
-                                        Gypse Type is required.
-                                    </strong>
-                                </div> -->
                                 <div class="form-group">
-                                    <label for="gypseType">Gypse Type</label>
+                                    <label for="gypseType">Gypsum Type <div style="color: #999;">The specific type or grade of gypsum being sold</div></label>
                                     <select formControlName="gypseType" class="form-control">
-                                        <option value="">Select Gypse Type</option>
+                                        <option value="">Select Gypsum Type</option>
                                         <option value="Staff">Staff</option>
                                         <option value="Moulage">Moulage</option>
                                         <option value="Plafond">Plafond</option>

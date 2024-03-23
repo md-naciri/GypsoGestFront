@@ -4,6 +4,8 @@ import { SaleService } from '../sale.service';
 import { SaleRequestInterface } from '../types/sale-request-interface';
 import { CardComponent } from "../../../theme/shared/components/card/card.component";
 import { CommonModule } from '@angular/common';
+import { ClientInterface } from '../../client/types/client-interface';
+import { ClientService } from '../../client/client.service';
 
 @Component({
   selector: 'app-addsale',
@@ -15,7 +17,7 @@ import { CommonModule } from '@angular/common';
 export class AddsaleComponent {
   errorMessage: string = '';
   successMessage: string = '';
-
+  clients: ClientInterface[] = [];
   addSaleForm = this.fb.group({
     date: ['', [Validators.required]],
     clientId: [0, [Validators.required, Validators.pattern('^[0-9]*$')]], // Ensure it's a number
@@ -26,9 +28,31 @@ export class AddsaleComponent {
 
   constructor(
     private fb: FormBuilder,
-    private saleService: SaleService
+    private saleService: SaleService,
+    private clientService: ClientService
   ) {}
 
+  ngOnInit(): void {
+    this.getClients();
+  }
+
+  getClients(): void {
+    this.clientService.getAllClients().subscribe(
+        (response: any) => {
+            // console.log(response);
+            if (response && response.data) {
+                this.clients = response.data;
+                console.log(response.data);
+            } else {
+                console.log("Invalid client response format");
+            }
+        },
+      (error) => {
+        console.log(error.error.error);
+      }
+    );
+  }
+  
   createSale(): void {
     this.markFormControlsAsTouched(this.addSaleForm);
   
@@ -58,7 +82,7 @@ export class AddsaleComponent {
       );
     }
   }
-  
+
 
   markFormControlsAsTouched(formGroup: FormGroup): void {
     Object.values(formGroup.controls).forEach(control => {
@@ -98,4 +122,26 @@ export class AddsaleComponent {
   removeItem(index: number): void {
     this.items.removeAt(index);
   }
+
+
+
+
+filteredClients: ClientInterface[] = [];
+
+filterClients(event: any): void {
+  const searchTerm = event.target.value;
+  this.filteredClients = this.clients.filter(client =>
+      client.FirstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      client.LastName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+}
+
+
+
+selectClient(client: ClientInterface): void {
+    this.addSaleForm.get('clientId').patchValue(client.id);
+    this.filteredClients = []; // Clear the filtered clients
+}
+
+
 }

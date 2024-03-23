@@ -4,6 +4,8 @@ import { TransactionService } from '../transaction.service';
 import { TransactionRequestInterface } from '../types/transaction-request-interface';
 import { CardComponent } from "../../../theme/shared/components/card/card.component";
 import { CommonModule } from '@angular/common';
+import { ClientInterface } from '../../client/types/client-interface';
+import { ClientService } from '../../client/client.service';
 
 @Component({
   selector: 'app-addtransaction',
@@ -16,12 +18,13 @@ import { CommonModule } from '@angular/common';
 export class AddtransactionComponent {
   errorMessage: string = '';
   successMessage: string = '';
-
+  clients: ClientInterface[] = [];
   addTransactionForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private transactionService: TransactionService
+    private transactionService: TransactionService,
+    private clientService: ClientService
   ) {
     this.addTransactionForm = this.fb.group({
       date: ['', [Validators.required]],
@@ -30,6 +33,27 @@ export class AddtransactionComponent {
       paymentCode: ['', [Validators.required]],
       clientId: [0, [Validators.required, Validators.pattern('^[0-9]*$')]]
     });
+  }
+
+  ngOnInit(): void {
+    this.getClients();
+  }
+
+  getClients(): void {
+    this.clientService.getAllClients().subscribe(
+        (response: any) => {
+            // console.log(response);
+            if (response && response.data) {
+                this.clients = response.data;
+                console.log(response.data);
+            } else {
+                console.log("Invalid client response format");
+            }
+        },
+      (error) => {
+        console.log(error.error.error);
+      }
+    );
   }
 
   createTransaction(): void {
@@ -67,4 +91,21 @@ export class AddtransactionComponent {
   closeErrorAlert(): void {
     this.errorMessage = '';
   }
+
+filteredClients: ClientInterface[] = [];
+
+filterClients(event: any): void {
+  const searchTerm = event.target.value;
+  this.filteredClients = this.clients.filter(client =>
+      client.FirstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      client.LastName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+}
+
+
+
+selectClient(client: ClientInterface): void {
+    this.addTransactionForm.get('clientId').patchValue(client.id);
+    this.filteredClients = []; // Clear the filtered clients
+}
 }
