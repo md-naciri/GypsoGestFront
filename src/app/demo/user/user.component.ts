@@ -39,7 +39,7 @@ export class UserComponent {
   deleteUser(username: string): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        message: 'Are you sure you want to delete this client?' // Confirmation message
+        message: 'Are you sure you want to delete this Employee?' // Confirmation message
       }
     });
   
