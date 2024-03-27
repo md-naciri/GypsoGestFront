@@ -4,10 +4,14 @@ import { Observable, tap } from 'rxjs';import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { PersistanceService } from './persistance.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private persistanceService:PersistanceService,private router:Router) {}
+  constructor(private persistanceService:PersistanceService,
+    private router:Router,
+    private authService: AuthService,
+    ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -34,9 +38,6 @@ export class AuthInterceptor implements HttpInterceptor {
             console.error('HTTP Error:', error);
           }
         ),
-        // catchError((error: HttpErrorResponse) => {
-        //   return throwError(error);
-        // })
         catchError((error: HttpErrorResponse) => {
           if (error.status === 403) {
             this.router.navigate(['/dashboard']);

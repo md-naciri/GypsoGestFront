@@ -30,7 +30,8 @@ const routes: Routes = [
       },
       {
         path: 'dashboard',
-        loadComponent: () => import('./demo/dashboard/dashboard.component'),
+        // loadComponent: () => import('./demo/dashboard/dashboard.component'),
+        loadComponent: () => import('./demo/extra/sample-page/sample-page.component'),
       },
       {
         path: 'basic',

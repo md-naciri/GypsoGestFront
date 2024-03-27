@@ -2,9 +2,19 @@
     <div class="col-xl-12">
         
       <app-card cardTitle="Client Debit" [options]="false" blockClass="table-border-style">
-        <div class="d-flex justify-content-end mb-3">
+        <!-- <div class="d-flex justify-content-end mb-3">
             <input type="number" placeholder="Enter Client ID" [(ngModel)]="clientId" class="form-control" (change)="getClientDebit()">
-          </div>
+          </div> -->
+          <div class="d-flex justify-content-end mb-3">
+            <input type="text" class="form-control" [(ngModel)]="clientId" placeholder="Search for a client..."
+                (input)="filterClients($event)" (keyup.enter)="getClientDebit()">
+        </div>
+        <div *ngIf="filteredClients.length > 0" class="autocomplete-list">
+            <div *ngFor="let client of filteredClients" (click)="selectClient(client)">
+                {{ client.FirstName }} {{ client.LastName }}
+            </div>
+        </div>
+        
         <div *ngIf="debitData" class="table-responsive">
           <table class="table table-styling">
             <thead>
